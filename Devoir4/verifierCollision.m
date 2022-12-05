@@ -1,6 +1,4 @@
 function rayonsCollision = verifierCollision (us,robs)
-  fprintf("le u1 est: ");
-  disp(us{2});
   rayonsCollision={};
   for i=1:1000
   ## point P respectant l'équation d'une sphère
@@ -10,19 +8,13 @@ function rayonsCollision = verifierCollision (us,robs)
   ##résolution de l'équation quadratique
   d1= (-b +(sqrt(b^2-(4*a*c))))/ (2*a);
   d2= (-b -(sqrt(b^2-(4*a*c))))/ (2*a);
-  #fprintf("le a est: ");
-  #disp(a);
-  #fprintf("le b est: ");
-  #disp(b);
-  #fprintf("le c est: ");
-  #disp(c);
   d=d1;
-    if(d1<0)
-    d=d2
+    if(not(isreal(d1)))
+    d=d2;
   endif
-  fprintf("le d est: ");
-  disp(d);
   ##le recopier dans un vecteur
   rayonsCollision{i}=[robs(1)+(d*us{i}(1));robs(2)+(d*us{i}(2));robs(3)+(d*us{i}(3))];
+  printf("la position des rayons sur la sphere est: ");
+  disp(rayonsCollision{i});
 endfor
 endfunction

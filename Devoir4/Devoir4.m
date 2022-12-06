@@ -1,9 +1,10 @@
-function retval= Devoir4(robs, nint, next)
+function [xi,yi,zi,face] = Devoir4(robs, nint, next)
   ## indice pour la première simulation
-  nint= 1.5;
-  next= 1;
-
   ## dimension boite
+  xi = [];
+  yi = [];
+  zi = [];
+  face = [];
   a=4;
   b=2;
   c=4;
@@ -12,12 +13,11 @@ function retval= Devoir4(robs, nint, next)
   ##dimension sphère
   r=8;
   ##position observateur
-  robs=[20;20;10];
   ##etape1 : déterminer le secteur
   ## 1.1 trouver theta zero
   thetaZero = trouverThetaZero(robs);
   phiZero= trouverPhiZero(thetaZero,robs);
-  theta= secteurAngulaire(robs,r);
+  theta= secteurAngulaire(robs);
   phi=trouverPhi(robs,r,theta);
   fprintf("this is theta from secteurAngulaire");
   disp(theta);
@@ -28,9 +28,17 @@ function retval= Devoir4(robs, nint, next)
   pointsCollision = verifierCollision(us,robs);
   ## function Type de rayon : refraction vs reflextion
   ##retourne seulement les rayons atteignant l'object
-  #rayons = snellDescartes(pointsCollision,us,nint,next);
-
-  retval=0;
-
-
+  counter=0;
+  rimage= snellDescartes(pointsCollision,us,nint,next,counter);
+  ##Reconstitution image
+  for c=1:length(rimage)
+    x(c)=rimage{c}(1);
+    y(c)=rimage{c}(2);
+    z(c)=rimage{c}(3);
+    faceOff(c)=rimage{c}(4);
+  endfor
+  xi = [xi;  x];
+  yi = [yi;  y];
+  zi = [zi;  z];
+  face=[face;  faceOff];
 endfunction

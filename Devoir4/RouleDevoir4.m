@@ -7,10 +7,6 @@ format long;
 close all ;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% D�finir les cas %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-nint= 1.5;
-next= 1;
-robs=[20;20;10];
-Devoir4(robs, nint, next);
 rad=8;
 aa=2;
 bb=1;
@@ -47,7 +43,7 @@ for itst=1:4
   line(Facezx,Facezy,[0 0 0 0 0],'Color','m');
   line(Facezx,Facezy,[cc cc cc cc cc],'Color','g');
   axis equal
-  ##[xi,yi,zi,face]=Devoir4(Robs(itst,:),nout(itst),nin(itst));
+  [xi,yi,zi,face]=Devoir4(Robs(itst,:),nout(itst),nin(itst));
   nbpoint=length(face);
   for ipoint=1:nbpoint
     if face(ipoint) == 1
